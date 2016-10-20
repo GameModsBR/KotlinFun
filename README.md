@@ -43,6 +43,7 @@ dependencies{
   compile('com.github.GameModsBR.KotlinFun:BungeePlugin:0.1'){
     exclude group:'net.md-5'
   }
+}
 ```
 
 ### Maven
