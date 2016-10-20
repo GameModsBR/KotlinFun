@@ -9,6 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.Plugin
+import java.lang.ref.WeakReference
 import java.util.*
 
 fun <T:PlayerData> Player.setMetadata(data: DataCompanion<T>, value: T) = setMetadata(data.key, data.plugin, value)
@@ -71,8 +72,18 @@ open class AutoDataCompanion<D : PlayerData>(plugin: Plugin, key: String, type: 
 }
 
 open class PlayerData(val uniqueId: UUID, val name : String) {
-    var player : Player? = null
-        get() = field ?: {field = Bukkit.getPlayer(uniqueId); field}.invoke()
+    private var playerRef : WeakReference<Player?> = WeakReference(null)
+
+    var player : Player?
+        get() {
+            val player = Bukkit.getPlayer(uniqueId)
+            if (player != null)
+                playerRef = WeakReference(player)
+            return player
+        }
+        private set(value) {
+            playerRef = WeakReference(value)
+        }
 
     constructor(player: OfflinePlayer) : this(player.uniqueId, player.name) {
         this.player = player.player
