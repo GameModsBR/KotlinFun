@@ -35,12 +35,12 @@ dependencies {
 
 If you want to work with a different Bukkit/BungeeCord version then add a exclusion rule, for example:
 ```gradle
-dependencies{
-  compile('com.github.GameModsBR.KotlinFun:BukkitPlugin:0.1'){
+dependencies {
+  compile('com.github.GameModsBR.KotlinFun:BukkitPlugin:0.1') {
     exclude module:'bukkit'
   }
   
-  compile('com.github.GameModsBR.KotlinFun:BungeePlugin:0.1'){
+  compile('com.github.GameModsBR.KotlinFun:BungeePlugin:0.1') {
     exclude group:'net.md-5'
   }
 }
