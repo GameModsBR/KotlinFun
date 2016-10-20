@@ -1,4 +1,4 @@
-@file:JvmName(name = "BukkitUtil")
+@file:JvmName(name = "ColorUtil")
 package br.com.gamemods.kotlinfun.bukkit
 
 import br.com.gamemods.kotlinfun.ColorizedBase
@@ -6,7 +6,15 @@ import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-class KotlinFun : JavaPlugin()
+class KotlinFun : JavaPlugin() {
+    companion object {
+        lateinit var instance : KotlinFun
+    }
+
+    override fun onEnable() {
+        instance = this
+    }
+}
 
 class Colorized(str: String) : ColorizedBase<ChatColor>(str) {
     override val format : EnumSet<ChatColor> = EnumSet.noneOf(ChatColor::class.java)

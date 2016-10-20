@@ -3,7 +3,7 @@ package br.com.gamemods.kotlinfun.bukkit
 import org.junit.Assert.*
 import org.junit.Test
 
-class KotlinFunTest {
+class ColorTest {
 
     @Test
     fun colors() {
