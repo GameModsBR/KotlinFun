@@ -49,12 +49,6 @@ open class DataCompanion<D : PlayerData>(val plugin: Plugin, val key: String, va
     operator fun contains(player: Player) = player.hasMetadata(key, plugin, type)
 
     protected open fun createMissing(player: Player) = factory.invoke(player)
-
-    private fun createAndSet(player: Player) : D {
-        val data = factory.invoke(player)
-        player.setMetadata(key, plugin, data)
-        return data
-    }
 }
 
 open class AutoDataCompanion<D : PlayerData>(plugin: Plugin, key: String, type: Class<D>, factory: (Player) -> D) :
