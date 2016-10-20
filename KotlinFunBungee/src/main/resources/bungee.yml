@@ -1,0 +1,4 @@
+name: KotlinFun
+version: ${version}
+author: joserobjr
+main: br.com.gamemods.kotlinfun.bungee.KotlinFun
