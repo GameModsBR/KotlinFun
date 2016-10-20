@@ -1,6 +1,6 @@
 allprojects {
     group 'br.com.gamemods.kotlinfun'
-    version '1.0-SNAPSHOT'
+    version '0.1'
 }
 
 buildscript {
@@ -59,9 +59,11 @@ subprojects {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    /*
     jar {
         baseName = "KotlinFun-${project.name}"
     }
+    */
 
     shadowJar {
         dependencies {
@@ -72,7 +74,7 @@ subprojects {
         }
 
         classifier = null
-        baseName = "KotlinFun-${project.name}"
+        // baseName = "KotlinFun-${project.name}"
         // relocate 'kotlin', 'br.com.gamemods.kotlinfun.kotlin'
     }
 
