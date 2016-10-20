@@ -43,12 +43,6 @@ open class DataCompanion<D : PlayerData>(val factory: (ProxiedPlayer) -> D) {
     operator fun contains(player: ProxiedPlayer) = player.uniqueId in idMap
 
     protected open fun createMissing(player: ProxiedPlayer) = factory.invoke(player)
-
-    private fun createAndSet(player: ProxiedPlayer) : D {
-        val data = factory.invoke(player)
-        set(player, data)
-        return data
-    }
 }
 
 open class AutoDataCompanion<D : PlayerData>(plugin: Plugin, factory: (ProxiedPlayer) -> D) :
