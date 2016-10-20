@@ -71,7 +71,12 @@ open class PlayerData(val uniqueId: UUID, val name : String) {
 
     var player : ProxiedPlayer?
         get() {
-            val player = ProxyServer.getInstance().getPlayer(uniqueId)
+            var player = playerRef.get()
+            if(player != null) {
+                return if(player.isConnected) player else null
+            }
+
+            player = ProxyServer.getInstance().getPlayer(uniqueId)
             if (player != null)
                 playerRef = WeakReference(player)
             return player

@@ -76,7 +76,12 @@ open class PlayerData(val uniqueId: UUID, val name : String) {
 
     var player : Player?
         get() {
-            val player = Bukkit.getPlayer(uniqueId)
+            var player = playerRef.get()
+            if(player != null) {
+                return if(player.isOnline) player else null
+            }
+
+            player = Bukkit.getPlayer(uniqueId)
             if (player != null)
                 playerRef = WeakReference(player)
             return player
