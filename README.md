@@ -100,7 +100,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BukkitPlugin</artifactId>
         <version>0.1</version>
-	<exclusions>
+        <exclusions>
             <exclusion>
                 <groupId>org.bukkit</groupId>
                 <artifactId>bukkit</artifactId>
@@ -112,7 +112,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BungeePlugin</artifactId>
         <version>0.1</version>
-	<exclusions>
+        <exclusions>
             <exclusion>
                 <groupId>net.md-5</groupId>
                 <artifactId>*</artifactId>
