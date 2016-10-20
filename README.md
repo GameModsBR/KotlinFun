@@ -33,6 +33,18 @@ dependencies {
 }
 ```
 
+If you want to work with a different Bukkit/BungeeCord version then add a exclusion rule, for example:
+```gradle
+dependencies{
+  compile('com.github.GameModsBR.KotlinFun:BukkitPlugin:0.1'){
+    exclude module:'bukkit'
+  }
+  
+  compile('com.github.GameModsBR.KotlinFun:BungeePlugin:0.1'){
+    exclude group:'net.md-5'
+  }
+```
+
 ### Maven
 Add this repository to your main `pom.xml`
 
@@ -77,5 +89,34 @@ Now add one of the depedencies below:
         <version>master-SNAPSHOT</version>
     </dependency>
     
+</dependencies>
+```
+
+If you want to work with a different Bukkit/BungeeCord version then add a exclusion rule, for example:
+```pom
+<dependencies>
+    <dependency>
+        <groupId>com.github.GameModsBR.KotlinFun</groupId>
+        <artifactId>BukkitPlugin</artifactId>
+        <version>0.1</version>
+	<exclusions>
+	    <exclusion>
+	        <groupId>org.bukkit</groupId>
+		<artifactId>bukkit</artifactId>
+	    </exclusion>
+	</exclusion>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.github.GameModsBR.KotlinFun</groupId>
+        <artifactId>BungeePlugin</artifactId>
+        <version>0.1</version>
+	<exclusions>
+	    <exclusion>
+	        <groupId>net.md-5</groupId>
+		<artifactId>*</artifactId>
+	    </exclusion>
+	</exclusion>
+    </dependency>
 </dependencies>
 ```
