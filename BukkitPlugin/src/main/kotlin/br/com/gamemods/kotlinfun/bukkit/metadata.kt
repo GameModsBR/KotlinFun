@@ -6,6 +6,7 @@ import org.bukkit.metadata.Metadatable
 import org.bukkit.plugin.Plugin
 import org.bukkit.util.NumberConversions
 import java.lang.ref.WeakReference
+import java.util.*
 
 fun <T> MetadataValue.value(type: Class<T>) : T? {
     val value = value()
@@ -27,7 +28,14 @@ fun <T> Metadatable.getMetadata(metadataKey: String, type: Class<T>) : List<T>
 fun Metadatable.hasMetadata(metadataKey: String, type: Class<*>)
         = getMetadata(metadataKey).map { it.value() }.filterIsInstance(type).isNotEmpty()
 
-fun Metadatable.setMetadata(metadataKey: String, plugin: Plugin, value: Any?) = setMetadata(metadataKey, ConstantMetadataValue(plugin, value))
+fun Metadatable.setMetadata(metadataKey: String, plugin: Plugin, value: Any?)
+        = setMetadata(metadataKey, ConstantMetadataValue(plugin, value))
+
+fun <T> Metadatable.removeMetadata(metadataKey: String, plugin: Plugin, type: Class<T>) : T? {
+    val data = getMetadata(metadataKey, plugin, type) ?: return null
+    removeMetadata(metadataKey, plugin)
+    return data
+}
 
 class ConstantMetadataValue(plugin: Plugin, private val value: Any?) : AbstractMetadataValue(WeakReference(plugin)) {
     override fun invalidate() {}
@@ -40,7 +48,6 @@ class MutableMetadataValue(plugin: Plugin, var value: Any?) : AbstractMetadataVa
 }
 
 abstract class AbstractMetadataValue(private val plugin: WeakReference<Plugin>) : MetadataValue {
-
     final override fun getOwningPlugin(): Plugin? = plugin.get()
 
     override abstract fun value(): Any?
@@ -87,4 +94,22 @@ abstract class AbstractMetadataValue(private val plugin: WeakReference<Plugin>) 
     }
 
     override fun asString() = value()?.toString() ?: ""
+
+    override fun equals(other: Any?): Boolean{
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+
+        other as AbstractMetadataValue
+
+        if (plugin.get() != other.plugin.get()) return false
+        return Objects.equals(value(), other.value())
+    }
+
+    override fun hashCode(): Int{
+        return value()?.hashCode() ?: plugin.hashCode()
+    }
+
+    override fun toString(): String{
+        return "${javaClass.simpleName}(plugin=$plugin, value=${value()?:"null"})"
+    }
 }
