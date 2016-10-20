@@ -94,7 +94,7 @@ Now add one of the depedencies below:
 ```
 
 If you want to work with a different Bukkit/BungeeCord version then add a exclusion rule, for example:
-```pom
+```xml
 <dependencies>
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
@@ -105,7 +105,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
 	        <groupId>org.bukkit</groupId>
 		<artifactId>bukkit</artifactId>
 	    </exclusion>
-	</exclusion>
+	</exclusions>
     </dependency>
     
     <dependency>
@@ -117,7 +117,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
 	        <groupId>net.md-5</groupId>
 		<artifactId>*</artifactId>
 	    </exclusion>
-	</exclusion>
+	</exclusions>
     </dependency>
 </dependencies>
 ```
