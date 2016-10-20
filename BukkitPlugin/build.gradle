@@ -4,13 +4,13 @@ repositories {
 
 dependencies {
     compile 'org.bukkit:bukkit:1.10.2-R0.1-SNAPSHOT'
-    compile project(':KotlinFunBungeeChat')
+    compile project(':BungeeChat')
 }
 
 
 shadowJar {
     dependencies {
-        include project(':KotlinFunBungeeChat')
+        include project(':BungeeChat')
     }
 }
 

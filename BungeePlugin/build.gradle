@@ -1,11 +1,11 @@
 dependencies {
     compile 'net.md-5:bungeecord-api:1.10-SNAPSHOT'
-    compile project(':KotlinFunBungeeChat')
+    compile project(':BungeeChat')
 }
 
 shadowJar {
     dependencies {
-        include project(':KotlinFunBungeeChat')
+        include project(':BungeeChat')
     }
 }
 

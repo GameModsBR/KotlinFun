@@ -59,6 +59,10 @@ subprojects {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    jar {
+        baseName = "KotlinFun-${project.name}"
+    }
+
     shadowJar {
         dependencies {
             include dependency("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
@@ -68,32 +72,33 @@ subprojects {
         }
 
         classifier = null
+        baseName = "KotlinFun-${project.name}"
         // relocate 'kotlin', 'br.com.gamemods.kotlinfun.kotlin'
     }
 
     build.finalizedBy shadowJar
 }
 
-project(':KotlinFunBungeeChat') {
+project(':BungeeChat') {
     dependencies {
         compile 'net.md-5:bungeecord-chat:1.10-SNAPSHOT'
     }
 }
 
-project(':KotlinFunUniversal') {
+project(':UniversalPlugin') {
     repositories {
         maven { url = bukkit_repo }
     }
 
     dependencies {
-        compile project(':KotlinFunBungee')
-        compile project(':KotlinFunBukkit')
+        compile project(':BungeePlugin')
+        compile project(':BukkitPlugin')
     }
 
     shadowJar {
         dependencies {
-            include project(':KotlinFunBungee')
-            include project(':KotlinFunBukkit')
+            include project(':BungeePlugin')
+            include project(':BukkitPlugin')
         }
     }
 }
