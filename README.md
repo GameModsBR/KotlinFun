@@ -101,11 +101,11 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
         <artifactId>BukkitPlugin</artifactId>
         <version>0.1</version>
 	<exclusions>
-	    <exclusion>
-	        <groupId>org.bukkit</groupId>
-		<artifactId>bukkit</artifactId>
-	    </exclusion>
-	</exclusions>
+            <exclusion>
+                <groupId>org.bukkit</groupId>
+                <artifactId>bukkit</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     
     <dependency>
@@ -113,11 +113,11 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
         <artifactId>BungeePlugin</artifactId>
         <version>0.1</version>
 	<exclusions>
-	    <exclusion>
-	        <groupId>net.md-5</groupId>
-		<artifactId>*</artifactId>
-	    </exclusion>
-	</exclusions>
+            <exclusion>
+                <groupId>net.md-5</groupId>
+                <artifactId>*</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 </dependencies>
 ```
