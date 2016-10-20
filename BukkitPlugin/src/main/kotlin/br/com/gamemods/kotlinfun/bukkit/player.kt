@@ -60,7 +60,7 @@ open class AutoDataCompanion<D : PlayerData>(plugin: Plugin, key: String, type: 
         DataCompanion<D>(plugin, key, type, factory), Listener {
 
     init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
+        plugin.register(this)
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
