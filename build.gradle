@@ -1,6 +1,6 @@
 allprojects {
     group 'br.com.gamemods.kotlinfun'
-    version '0.1'
+    version '0.2-SNAPSHOT'
 }
 
 buildscript {
