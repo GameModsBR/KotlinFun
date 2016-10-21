@@ -1,17 +1,5 @@
-repositories {
-    maven { url = bukkit_repo }
-}
-
 dependencies {
     compile 'org.bukkit:bukkit:1.10.2-R0.1-SNAPSHOT'
-    compile project(':BungeeChat')
-}
-
-
-shadowJar {
-    dependencies {
-        include project(':BungeeChat')
-    }
 }
 
 processResources {

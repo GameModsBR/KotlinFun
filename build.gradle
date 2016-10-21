@@ -1,11 +1,16 @@
 allprojects {
     group 'br.com.gamemods.kotlinfun'
     version '0.2-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url = 'https://hub.spigotmc.org/nexus/content/groups/public/' }
+    }
 }
 
 buildscript {
     ext.kotlin_version = '1.0.3'
-    ext.bukkit_repo = 'https://hub.spigotmc.org/nexus/content/groups/public/'
 
     repositories {
         mavenCentral()
@@ -19,10 +24,6 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -42,11 +43,6 @@ subprojects {
         options.encoding = 'UTF-8'
     }
 
-    repositories {
-        mavenCentral()
-        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
-
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
@@ -54,16 +50,6 @@ subprojects {
         compile rootProject
         testCompile group: 'junit', name: 'junit', version: '4.11'
     }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    /*
-    jar {
-        baseName = "KotlinFun-${project.name}"
-    }
-    */
 
     shadowJar {
         dependencies {
@@ -74,8 +60,6 @@ subprojects {
         }
 
         classifier = null
-        // baseName = "KotlinFun-${project.name}"
-        // relocate 'kotlin', 'br.com.gamemods.kotlinfun.kotlin'
     }
 
     build.finalizedBy shadowJar
@@ -88,19 +72,15 @@ project(':BungeeChat') {
 }
 
 project(':UniversalPlugin') {
-    repositories {
-        maven { url = bukkit_repo }
-    }
-
     dependencies {
         compile project(':BungeePlugin')
-        compile project(':BukkitPlugin')
+        compile project(':SpigotPlugin')
     }
 
     shadowJar {
         dependencies {
             include project(':BungeePlugin')
-            include project(':BukkitPlugin')
+            include project(':SpigotPlugin')
         }
     }
 }

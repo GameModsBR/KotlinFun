@@ -1,0 +1,14 @@
+dependencies {
+    compile 'org.spigotmc:spigot-api:1.10.2-R0.1-SNAPSHOT'
+    compile project(':BungeeChat')
+    compile(project(':BukkitPlugin')) {
+        exclude module:'bukkit'
+    }
+}
+
+shadowJar {
+    dependencies {
+        include project(':BungeeChat')
+        include project(':BukkitPlugin')
+    }
+}

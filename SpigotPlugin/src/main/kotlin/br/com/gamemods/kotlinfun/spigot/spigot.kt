@@ -1,6 +1,7 @@
 @file:JvmName("SpigotUtil")
-package br.com.gamemods.kotlinfun.bukkit
+package br.com.gamemods.kotlinfun.spigot
 
+import br.com.gamemods.kotlinfun.bukkit.Colorized
 import br.com.gamemods.kotlinfun.bungee.ComponentArray
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.*
