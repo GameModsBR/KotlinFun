@@ -72,13 +72,13 @@ class Colorized(str: String) : ColorizedBase<ChatColor>(str) {
 operator fun BaseComponent.plus(o: ChatColor) = ComponentArray(this) + o
 operator fun BaseComponent.plus(o: BaseComponent) = ComponentArray(this) + o
 operator fun BaseComponent.plus(o: ComponentBuilder) = ComponentArray(o, this)
-operator fun BaseComponent.plus(o: ComponentArray) = {o.add(0, this); o}
+operator fun BaseComponent.plus(o: ComponentArray) : ComponentArray {o.add(0, this); return o}
 operator fun BaseComponent.plus(o: Array<out BaseComponent>) = ComponentArray(this) + o
 operator fun BaseComponent.plus(o: String) = ComponentArray(this) + o
 operator fun BaseComponent.plus(o: Any?) = ComponentArray(this) + o
-fun BaseComponent.insertion(insertion: String?) = {setInsertion(insertion); this}
-fun BaseComponent.event(clickEvent: ClickEvent?) = {setClickEvent(clickEvent); this}
-fun BaseComponent.event(hoverEvent: HoverEvent?) = {setHoverEvent(hoverEvent); this}
+fun BaseComponent.insertion(insertion: String?): BaseComponent {setInsertion(insertion); return this}
+fun BaseComponent.event(clickEvent: ClickEvent?): BaseComponent {setClickEvent(clickEvent); return this}
+fun BaseComponent.event(hoverEvent: HoverEvent?): BaseComponent {setHoverEvent(hoverEvent); return this}
 fun BaseComponent.format(style: ChatColor?) : BaseComponent {
     when(style) {
         null -> Unit
@@ -155,7 +155,7 @@ fun String.event(hoverEvent: HoverEvent) = component().event(hoverEvent)
 
 operator fun ComponentBuilder.plus(o: BaseComponent) = create() + o
 operator fun ComponentBuilder.plus(o: ComponentBuilder) = ComponentArray(o, create())
-operator fun ComponentBuilder.plus(o: ComponentArray) = {o.addAll(0, create().asList()); o}
+operator fun ComponentBuilder.plus(o: ComponentArray): ComponentArray {o.addAll(0, create().asList()); return o}
 operator fun ComponentBuilder.plus(o: Array<out BaseComponent>) = this + o.builder()
 operator fun ComponentBuilder.plus(o: Any?) = append(o.toString(), ComponentBuilder.FormatRetention.FORMATTING)!!
 fun ComponentBuilder.black() = color(ChatColor.BLACK)!!
@@ -236,21 +236,21 @@ class ComponentArray : ArrayList<BaseComponent> {
     }
 
     fun build() = builder
-    fun color(color: ChatColor) = {builder.color(color); this}
-    fun obfuscated(magic: Boolean) = {builder.obfuscated(magic); this}
-    fun bold(bold: Boolean) = {builder.bold(bold); this}
-    fun strikethrough(strike: Boolean) = {builder.strikethrough(strike); this}
-    fun underlined(underlined: Boolean) = {builder.underlined(underlined); this}
-    fun italic(italic: Boolean) = {builder.italic(italic); this}
-    fun append(text: String) = {builder.append(text); this}
-    fun append(text: String, retention: ComponentBuilder.FormatRetention) = {builder.append(text, retention); this}
+    fun color(color: ChatColor): ComponentArray {builder.color(color); return this}
+    fun obfuscated(magic: Boolean): ComponentArray {builder.obfuscated(magic); return this}
+    fun bold(bold: Boolean): ComponentArray {builder.bold(bold); return this}
+    fun strikethrough(strike: Boolean): ComponentArray {builder.strikethrough(strike); return this}
+    fun underlined(underlined: Boolean): ComponentArray {builder.underlined(underlined); return this}
+    fun italic(italic: Boolean): ComponentArray {builder.italic(italic); return this}
+    fun append(text: String): ComponentArray {builder.append(text); return this}
+    fun append(text: String, retention: ComponentBuilder.FormatRetention): ComponentArray {builder.append(text, retention); return this}
     @Deprecated("Conflicts with ComponentBuilder.reset()", ReplaceWith("resetColor()"))
-    fun reset() = {builder.reset(); this}
-    fun insertion(insertion: String) = {builder.insertion(insertion); this}
-    fun event(clickEvent: ClickEvent) = {builder.event(clickEvent); this}
-    fun event(hoverEvent: HoverEvent) = {builder.event(hoverEvent); this}
-    fun retain(retain: ComponentBuilder.FormatRetention) = {builder.retain(retain); this}
-    fun create() = {flush(); toTypedArray()}
+    fun reset(): ComponentArray {builder.reset(); return this}
+    fun insertion(insertion: String): ComponentArray {builder.insertion(insertion); return this}
+    fun event(clickEvent: ClickEvent): ComponentArray {builder.event(clickEvent); return this}
+    fun event(hoverEvent: HoverEvent): ComponentArray {builder.event(hoverEvent); return this}
+    fun retain(retain: ComponentBuilder.FormatRetention): ComponentArray {builder.retain(retain); return this}
+    fun create() : Array<BaseComponent> {flush(); return toTypedArray()}
     fun flush() : ComponentArray {
         addAll(openBuilder?.create() ?: return this)
         openBuilder = null
@@ -306,14 +306,14 @@ class ComponentArray : ArrayList<BaseComponent> {
         return super.addAll(index, elements)
     }
 
-    operator fun plus(o: ChatColor) = {flush(); builder.format(o)}
-    operator fun plus(o: BaseComponent) = {add(o); this}
+    operator fun plus(o: ChatColor): ComponentBuilder {flush(); return builder.format(o)}
+    operator fun plus(o: BaseComponent): ComponentArray {add(o); return this}
     operator fun plus(o: ComponentBuilder) = this + o.create()
-    operator fun plus(other: ComponentArray) = {
+    operator fun plus(other: ComponentArray): ComponentArray {
         addAll(other)
         openBuilder = other.openBuilder
-        this
+        return this
     }
-    operator fun plus(o: Array<out BaseComponent>) = {addAll(o); this}
+    operator fun plus(o: Array<out BaseComponent>): ComponentArray {addAll(o); return this}
     operator fun plus(o: Any?) = append(o.toString())
 }

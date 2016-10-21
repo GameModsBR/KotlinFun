@@ -1,3 +1,4 @@
+@file:JvmName("CommonUtil")
 package br.com.gamemods.kotlinfun
 
 fun Any?.str() = this?.toString() ?: ""
