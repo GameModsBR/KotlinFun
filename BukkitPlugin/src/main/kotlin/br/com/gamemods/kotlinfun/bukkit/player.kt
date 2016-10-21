@@ -1,3 +1,4 @@
+@file:JvmName("PlayerUtil")
 package br.com.gamemods.kotlinfun.bukkit
 
 import org.bukkit.Bukkit

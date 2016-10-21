@@ -8,7 +8,7 @@ import java.util.*
 class Colorized(str: String) : ColorizedBase<ChatColor>(str) {
     override val format : EnumSet<ChatColor> = EnumSet.noneOf(ChatColor::class.java)
 
-    fun currentFormat() = format.clone()
+    fun currentFormat(): EnumSet<ChatColor> = format.clone()
 
     private fun setColor(c: ChatColor?) : Colorized {
         color = c
@@ -68,4 +68,4 @@ fun String.strike() = Colorized(this).strike()
 fun String.underline() = Colorized(this).underline()
 fun String.italic() = Colorized(this).italic()
 
-operator fun ChatColor.plus(str : String) = this.toString() + str
+operator fun ChatColor.plus(o: Any?) = this.toString() + o
