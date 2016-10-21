@@ -4,7 +4,7 @@ fun Any?.str() = this?.toString() ?: ""
 
 val toStringOrEmpty : ((Any?) -> CharSequence) = { it.str() }
 
-abstract class ColorizedBase<E>(private val str: String) {
+abstract class ColorizedBase<E>(protected val str: String) {
     var color : E? = null
         protected set
 
