@@ -15,3 +15,5 @@ processResources {
         exclude 'plugin.yml'
     }
 }
+
+shadowJar.enabled = false
