@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.4"
+    }
+}
+
+group 'br.com.gamemods.kotlinfun.examples'
+version '0.2'
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/groups/public/' }
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'org.spigotmc:spigot-api:1.10.2-R0.1-SNAPSHOT'
+    compile('com.github.GameModsBR.KotlinFun:SpigotPlugin:0.2')
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'plugin.yml'
+
+        expand 'version':project.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'plugin.yml'
+    }
+}

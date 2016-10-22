@@ -1,0 +1,13 @@
+name: KotlinFunExampleBukkit
+version: ${version}
+main: example.kotlinfun.bukkit.SamplePlugin
+
+commands:
+  silly:
+    description: Tells you if you are silly
+  ts:
+    description: Show/Hide where the entities are spawning
+  tdt:
+    description: Show/Hide where the entities are dying
+  tda:
+    description: Show/Hide where the entities are taking damage
