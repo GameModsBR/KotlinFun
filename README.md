@@ -18,16 +18,19 @@ Now add one of compile line below:
 ```gradle
 dependencies {
 
-  // For 0.1 Bukkit:
-  compile 'com.github.GameModsBR.KotlinFun:BukkitPlugin:0.1'
+  // For 0.2 Spigot:
+  compile 'com.github.GameModsBR.KotlinFun:SpigotPlugin:0.2'
   
-  // For 0.1 BungeeCord:
-  compile 'com.github.GameModsBR.KotlinFun:BungeePlugin:0.1'
+  // For 0.2 Bukkit:
+  compile 'com.github.GameModsBR.KotlinFun:BukkitPlugin:0.2'
   
-  // For 0.1 Universal:
-  compile 'com.github.GameModsBR.KotlinFun:UniversalPlugin:0.1'
+  // For 0.2 BungeeCord:
+  compile 'com.github.GameModsBR.KotlinFun:BungeePlugin:0.2'
   
-  // For 0.2-SNAPSHOT (includes everything)
+  // For 0.2 Universal:
+  compile 'com.github.GameModsBR.KotlinFun:UniversalPlugin:0.2'
+  
+  // For 0.3-SNAPSHOT (includes everything)
   compile 'com.github.GameModsBR:KotlinFun:master-SNAPSHOT'
   
 }
@@ -53,7 +56,7 @@ Add this repository to your main `pom.xml`
 <repositories>
     <repository>
         <id>jitpack.io</id>
-	      <url>https://jitpack.io</url>
+        <url>https://jitpack.io</url>
     </repository>
 </repositories>
 ```
@@ -62,28 +65,35 @@ Now add one of the depedencies below:
 ```xml
 <dependencies>
 
-    <!-- For 0.1 Bukkit -->
+    <!-- For 0.2 Spigot -->
+    <dependency>
+        <groupId>com.github.GameModsBR.KotlinFun</groupId>
+        <artifactId>SpigotPlugin</artifactId>
+        <version>0.2</version>
+    </dependency>
+
+    <!-- For 0.2 Bukkit -->
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BukkitPlugin</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </dependency>
     
-    <!-- For 0.1 BungeeCord -->
+    <!-- For 0.2 BungeeCord -->
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BungeePlugin</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </dependency>
     
-    <!-- For 0.1 Universal -->
+    <!-- For 0.2 Universal -->
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>UniversalPlugin</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </dependency>
     
-    <!-- For 0.2-SNAPSHOT (includes everything) -->
+    <!-- For 0.3-SNAPSHOT (includes everything) -->
     <dependency>
         <groupId>com.github.GameModsBR</groupId>
         <artifactId>KotlinFun</artifactId>
@@ -99,7 +109,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BukkitPlugin</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
         <exclusions>
             <exclusion>
                 <groupId>org.bukkit</groupId>
@@ -111,7 +121,7 @@ If you want to work with a different Bukkit/BungeeCord version then add a exclus
     <dependency>
         <groupId>com.github.GameModsBR.KotlinFun</groupId>
         <artifactId>BungeePlugin</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
         <exclusions>
             <exclusion>
                 <groupId>net.md-5</groupId>
