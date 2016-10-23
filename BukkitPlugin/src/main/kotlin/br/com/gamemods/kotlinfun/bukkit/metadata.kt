@@ -8,6 +8,8 @@ import org.bukkit.util.NumberConversions
 import java.lang.ref.WeakReference
 import java.util.*
 
+inline fun <reified T> MetadataValue.value() = value() as? T
+
 fun <T> MetadataValue.value(type: Class<T>) : T? {
     val value = value()
     return if(type.isInstance(value)) type.cast(value) else null
@@ -16,11 +18,17 @@ fun <T> MetadataValue.value(type: Class<T>) : T? {
 fun Metadatable.getMetadata(metadataKey: String, plugin: Plugin) = getMetadata(metadataKey).find { it.owningPlugin == plugin }
 fun Metadatable.hasMetadata(metadataKey: String, plugin: Plugin) = getMetadata(metadataKey, plugin) != null
 
+inline fun <reified T> Metadatable.getMetadata(metadataKey: String, plugin: Plugin)
+        = getMetadata(metadataKey, plugin)?.value() as? T
+
 fun <T> Metadatable.getMetadata(metadataKey: String, plugin: Plugin, type: Class<T>)
         = getMetadata(metadataKey, plugin)?.value(type)
 
 fun Metadatable.hasMetadata(metadataKey: String, plugin: Plugin, type: Class<*>)
         = type.isInstance(getMetadata(metadataKey, plugin))
+
+inline fun <reified T : Any> Metadatable.getMetadata(metadataKey: String) : List<T>
+        = getMetadata(metadataKey, T::class.java)
 
 fun <T> Metadatable.getMetadata(metadataKey: String, type: Class<T>) : List<T>
         = getMetadata(metadataKey).map { it.value() }.filterIsInstance(type)
@@ -30,6 +38,9 @@ fun Metadatable.hasMetadata(metadataKey: String, type: Class<*>)
 
 fun Metadatable.setMetadata(metadataKey: String, plugin: Plugin, value: Any?)
         = setMetadata(metadataKey, ConstantMetadataValue(plugin, value))
+
+inline fun <reified T : Any> Metadatable.removeMetadata(metadataKey: String, plugin: Plugin)
+        = removeMetadata(metadataKey, plugin, T::class.java)
 
 fun <T> Metadatable.removeMetadata(metadataKey: String, plugin: Plugin, type: Class<T>) : T? {
     val data = getMetadata(metadataKey, plugin, type) ?: return null

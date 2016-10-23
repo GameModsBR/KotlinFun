@@ -82,4 +82,23 @@ open class PlayerData(val uniqueId: UUID, val name : String) {
     constructor(player: ProxiedPlayer) : this(player.uniqueId, player.name) {
         this.player = player
     }
+
+    open val companion : DataCompanion<PlayerData>? = null
+
+    fun set() : Boolean {
+        companion?.set(player ?: return false, this) ?: throw UnsupportedOperationException("The 'companion' property is null")
+        return true
+    }
+
+    fun current() = companion?.get(uniqueId) ?: throw UnsupportedOperationException("The 'companion' property is null")
+
+    fun unset() : Boolean {
+        val companion = companion ?: throw UnsupportedOperationException("The 'companion' property is null")
+        val player = player ?: return false
+        if(companion[player] != this) {
+            return false
+        }
+        companion[player] = null
+        return true
+    }
 }

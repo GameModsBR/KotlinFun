@@ -3,6 +3,7 @@ package br.com.gamemods.kotlinfun.bukkit
 
 import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -34,6 +35,10 @@ open class DataCompanion<D : PlayerData>(val plugin: Plugin, val key: String, va
         return data
     }
 
+    operator fun get(sender: CommandSender?): D? {
+        return get(sender as? Player ?: return null)
+    }
+
     operator fun set(player: Player, data: D?) {
         if(data != null)
             player.setMetadata(key, plugin, data)
@@ -48,6 +53,8 @@ open class DataCompanion<D : PlayerData>(val plugin: Plugin, val key: String, va
     }
 
     operator fun contains(player: Player) = player.hasMetadata(key, plugin, type)
+
+    operator fun iterator() : Iterator<D> =  Bukkit.getOnlinePlayers().map { get(it) }.filterNotNull().iterator()
 
     protected open fun createMissing(player: Player) = factory.invoke(player)
 }

@@ -1,6 +1,9 @@
 allprojects {
+    if(project.name.contains('Example'))
+        return
+
     group 'br.com.gamemods.kotlinfun'
-    version '0.2'
+    version '0.3-SNAPSHOT'
 
     apply plugin: 'kotlin'
 
@@ -17,7 +20,7 @@ allprojects {
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.3'
+    ext.kotlin_version = '1.0.4'
 
     repositories {
         mavenCentral()
@@ -31,6 +34,9 @@ buildscript {
 }
 
 subprojects {
+    if(project.name.contains('Example'))
+        return
+
     apply plugin: 'kotlin'
     apply plugin: 'com.github.johnrengelman.shadow'
 
